@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Portaria Inteligente - TechZone</title>
+</head>
+<body>
+
+    <div>
+        <h2>Portaria TechZone</h2>
+
+        <div>
+            <label>Nome do Colaborador</label>
+            <input type="text" id="nome" placeholder="Digite seu nome">
+        </div>
+
+        <div>
+            <label>Hora Atual (0-23)</label>
+            <input type="number" id="hora" placeholder="Digite a hora" min="0" max="23">
+        </div>
+
+        <button onclick="verificarAcesso()">Verificar Acesso</button>
+
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        function verificarAcesso() {
+
+            let autorizados = ["Gbrt", "Vila", "Tukaze", "Breno", "Ludmila", "Zanneti"];
+
+            let nomeUsuario = document.getElementById("nome").value;
+            let horaAtual = Number(document.getElementById("hora").value);
+            let resultado = document.getElementById("resultado");
+
+            if (autorizados.includes(nomeUsuario)) {
+
+                if (horaAtual >= 6 && horaAtual < 22) {
+                    resultado.innerHTML = "✅ Acesso Permitido. Bem-vindo, " + nomeUsuario + "!";
+                    resultado.style.color = "green";
+
+                } else if (horaAtual >= 22 && horaAtual <= 23) {
+                    resultado.innerHTML = "⛔ Acesso Negado: Fora do horário permitido.";
+                    resultado.style.color = "red";
+
+                } else {
+                    resultado.innerHTML = "⚠ Horário inválido. Digite entre 0 e 23.";
+                    resultado.style.color = "orange";
+                }
+
+            } else {
+                resultado.innerHTML = "❌ Acesso Negado: Usuário não cadastrado.";
+                resultado.style.color = "red";
+            }
+        }
+    </script>
+
+</body>
+</html>
